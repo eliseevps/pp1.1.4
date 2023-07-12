@@ -1,5 +1,10 @@
 package jm.task.core.jdbc.util;
 
+import jm.task.core.jdbc.model.User;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -14,6 +19,7 @@ public class Util {
     private static final String USERNAME_KEY = "db.username";
     private static final String PASSWORD_KEY = "db.password";
     private static Connection connection;
+    private static SessionFactory sessionFactory;
 
     static {
         loadProperties();
@@ -42,5 +48,11 @@ public class Util {
             System.err.println("Connection failed!");
         }
         return connection;
+    }
+
+    public static SessionFactory getSessionFactory() {
+        return sessionFactory = new Configuration()
+                .addAnnotatedClass(User.class)
+                .buildSessionFactory();
     }
 }
