@@ -1,7 +1,6 @@
 package jm.task.core.jdbc.util;
 
 import jm.task.core.jdbc.model.User;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -19,7 +18,6 @@ public class Util {
     private static final String USERNAME_KEY = "db.username";
     private static final String PASSWORD_KEY = "db.password";
     private static Connection connection;
-    private static SessionFactory sessionFactory;
 
     static {
         loadProperties();
@@ -51,7 +49,7 @@ public class Util {
     }
 
     public static SessionFactory getSessionFactory() {
-        return sessionFactory = new Configuration()
+        return new Configuration()
                 .addAnnotatedClass(User.class)
                 .buildSessionFactory();
     }
